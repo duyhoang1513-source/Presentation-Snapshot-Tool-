@@ -2,30 +2,24 @@ name: Build C# App
 
 on:
   push:
-    branches: [ "main" ] # Chạy mỗi khi ông lưu code vào nhánh chính
-  workflow_dispatch:      # Cho phép ông bấm nút "Build" thủ công
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: windows-latest # Mượn server Windows của GitHub
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4 # Lấy code từ repo của ông
+    - uses: actions/checkout@v4
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v2 # Cài đặt trình biên dịch của Microsoft
-
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1 # Quản lý các thư viện nếu có
-
-    - name: Restore Packages
-      run: nuget restore # Khôi phục các thư viện cần thiết
+      uses: microsoft/setup-msbuild@v2
 
     - name: Build App
-      run: msbuild /p:Configuration=Release /p:Platform="Any CPU" # Lệnh compile ra file .exe
+      run: msbuild PresentationSnapshot.csproj /p:Configuration=Release /p:Platform="Any CPU"
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v4 # Đẩy file .exe đã build xong lên mục Actions
+      uses: actions/upload-artifact@v4
       with:
         name: SnapshotTool-Executable
-        path: bin/Release/*.exe # Đường dẫn lấy file thành phẩm
+        path: bin/Release/
