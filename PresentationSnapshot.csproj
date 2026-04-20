@@ -4,5 +4,6 @@
     <TargetFramework>net48</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>SystemHostUpdate</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 </Project>
